@@ -1,5 +1,7 @@
 # Exercises
 
+Paste the snippets below one at a time into the index.js file. Think about your answers BEFORE you run the code. When you are ready, open the index.html file in the browser and open the developer tools
+
 ## Tips
 
 Use your debugging tools in these exercises:
@@ -7,91 +9,125 @@ Use your debugging tools in these exercises:
 - console.log
 - debugger (only if running in the browser)
 
-## Part 1: Scoping and Hoisting
-
-Instructions: Paste the code snippets below into the `index.js` file one at a time. BEFORE invoking the defined functions, your job is to determine what all of the console.log statements will print out. Once you have some answers, invoke the functions and run the file (`node index.js`) to see if you're right!
 
 ### Exercise 1
-```
-function scopey() {
-  var a = "first Value";
-  let b = "first Value";
-  const c = "first Value";
-  d = "first Value";
 
-  if (true) {
-    var a = "second Value";
-    let b = "second Value";
-    const c = "second Value";
-    d = "second Value";
-  }
-
-  // what will each statement log to the console?
-  console.log("a (var) is,", a);
-  console.log("b (let) is,", b);
-  console.log("c (const) is,", c);
-  console.log("d (evil) is,", d);
-}
+What order will we see these logged in?
 
 ```
+console.log("start")
+
+setTimeout(() => console.log("set timeout 2 sec"), 2000)
+
+setTimeout(() => console.log("set timeout 1 sec"), 1000)
+
+setTimeout(() => console.log("set timeout 1 sec"), 0)
+
+console.log("end")
+
+
+````
+
 
 ### Exercise 2
-```
-  function sayName() {
-    console.log("My name is", theName);
 
-    var theName = "Jane Doe";
-  }
+What order will we see these logged in?
+
 
 ```
+
+
+let url = "http://api.open-notify.org/astros.json"
+
+console.log("start")
+
+setTimeout(() => console.log("set timeout 1 sec"), 0)
+
+fetch(url).then(r => console.log("in first then"))
+
+console.log("end")
+
+
+```
+
+
 
 ### Exercise 3
-```
-  function sayName() {
-    console.log("My theName is", theName);
 
-    let theName = "Jane Doe";
-  }
+What order will we see these logged in?
 
 
 ```
+
+let url = "http://api.open-notify.org/astros.json"
+
+setTimeout(() => console.log("set timeout 1 sec"), 0)
+
+console.log("start")
+
+fetch(url).then(r => console.log("in first then")).then(console.log("in second then"))
+
+console.log("end")
+
+
+```
+
 
 ### Exercise 4
-```
-function sayName() {
-  console.log("My name is", theName());
 
-  function theName() {
-    return "Jane Doe";
-  }
-}
+What order will we see these logged in?
 
 
 ```
+
+let url = "http://api.open-notify.org/astros.json"
+
+console.log("start")
+
+fetch(url).then(r => console.log("in first then")).then(console.log("in second then")).catch(console.log("in catch"))
+
+console.log("end")
+
+
+```
+
 
 ### Exercise 5
-```
-  function sayName() {
-    console.log("My theName is", theName());
 
-    var theName = function() {
-      return "Jane Doe";
-    };
-  }
+What order will we see these logged in?
 
 
 ```
+
+
+let url = "http://api.open-notify.org/astros.json"
+
+console.log("start")
+
+fetch(url).then(r => console.log("in first then")).then(console.log("in second then")).catch(function(e) { console.log("in catch")})
+
+console.log("end")
+
+
+```
+
+
 
 ### Exercise 6
 
+What order will we see these logged in?
+
+Note: typo in the url
 ```
-var salary = "$1000";
-var paid = function() {
-  console.log("Original salary was", salary);
 
-  salary = "$5000";
 
-  console.log("My New Salary", salary);
-};
+let url = "http://api.open-noify.org/astros.json"
+
+console.log("start")
+
+fetch(url).then(r => console.log("in first then")).then(console.log("in second then")).catch(function(e) { console.log("in catch")})
+
+console.log("end")
+
 
 ```
