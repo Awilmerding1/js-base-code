@@ -12,33 +12,58 @@ Use your debugging tools in these exercises:
 
 ### Exercise 1
 
-What will the return values be?
+Compare the order of the console.logs using #then vs async await:
+
+
+Using #then
 
 ```
-this.character = "Daisy";
 
-const game = {
-character: "Mario",
-details: {
-  character: "Yoshi",
-  characterName: function() {
-    return this.character;
-  },
-  arrowCharacterName: () => this.character
+function fetchAstros(){
+  const url = "http://api.open-notify.org/astros.json"
+
+    console.log("before fetch")
+
+  fetch(url)
+  .then(r => {
+    console.log("first then")
+    return r.json()
+  }).then(astros => {
+    console.log("second then")
+  })
+
+  console.log("end of fetchAstros")
+
 }
-};
 
+//paste the below into the console at the same time
+  fetchAstros()
+  console.log("after fetchAstros")
+
+```
+
+Using async-await
 
 ```
 
-What will the below return values be
+async function fetchAstros(){
+  const url = "http://api.open-notify.org/astros.json"
+
+  console.log("before fetch")
+
+  let response = await fetch(url)
+
+  console.log("after fetch")
+
+  let astroArray = await response.json()
+
+  console.log("end of fetchAstros")
+
+}
+
+//paste the below into the console at the same time
+
+fetchAstros()
+console.log("after fetchAstros")
 
 ```
-game.details.characterName
-game.details.characterName()
-const characterName = game.details.characterName characterName()
-game.details.arrowCharacterName()
-
-````
-
-How can we start off with game.details.characterName and get "Mario" without changing the details using =?
