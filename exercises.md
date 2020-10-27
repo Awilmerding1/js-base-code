@@ -12,58 +12,47 @@ Use your debugging tools in these exercises:
 
 ### Exercise 1
 
-Compare the order of the console.logs using #then vs async await:
+NOTE: Run these in your browser console NOT node 
+
+What will the value of `this` be in the console.logs?
 
 
-Using #then
+```
+  function windowFunction() {
+
+    console.log("windowFunction:", this)
+
+    let arrowFunction = () => console.log("arrowFunction:", this)
+
+    function regularFunction(){
+      console.log("regularFunction:", this)
+    }
+
+    regularFunction()
+    arrowFunction()
+  }
+
+
+  let myObj = {myKey: "myValue"}
+
 
 ```
 
-function fetchAstros(){
-  const url = "http://api.open-notify.org/astros.json"
+What will we see logged when we call `windowFunction()`?
 
-    console.log("before fetch")
+What will we see logged when we call `windowFunction.call(myObj)`?
 
-  fetch(url)
-  .then(r => {
-    console.log("first then")
-    return r.json()
-  }).then(astros => {
-    console.log("second then")
-  })
 
-  console.log("end of fetchAstros")
+### Exercise 2
 
-}
-
-//paste the below into the console at the same time
-  fetchAstros()
-  console.log("after fetchAstros")
+Add the below two properties to `myObj`. What will the value of `this` be when we invoke the functions?
 
 ```
-
-Using async-await
-
+  myObj.regFn = function() {console.log(this)}
+  myObj.arrowFn = () => console.log(this)
 ```
 
-async function fetchAstros(){
-  const url = "http://api.open-notify.org/astros.json"
 
-  console.log("before fetch")
+What will we see logged when we call `myObj.regFn()`?
 
-  let response = await fetch(url)
-
-  console.log("after fetch")
-
-  let astroArray = await response.json()
-
-  console.log("end of fetchAstros")
-
-}
-
-//paste the below into the console at the same time
-
-fetchAstros()
-console.log("after fetchAstros")
-
-```
+What will we see logged when we call `myObj.arrowFn()`?
