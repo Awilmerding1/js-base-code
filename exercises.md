@@ -12,7 +12,7 @@ Use your debugging tools in these exercises:
 
 ### Exercise 1
 
-NOTE: Run these in your browser console NOT node 
+NOTE: Run these in your browser console NOT node
 
 What will the value of `this` be in the console.logs?
 
@@ -56,3 +56,38 @@ Add the below two properties to `myObj`. What will the value of `this` be when w
 What will we see logged when we call `myObj.regFn()`?
 
 What will we see logged when we call `myObj.arrowFn()`?
+
+
+### Exercise 3
+
+Paste the code below into your browser console
+
+```
+  this.character = "Daisy";
+
+  const game = {
+    character: "Mario",
+    details: {
+      character: "Yoshi",
+      characterName: function() {
+        return this.character;
+      },
+      arrowCharacterName: () => this.character
+    }
+  };
+
+```
+
+What will the values of `this` be that is returned in the following cases:
+
+
+`game.details.characterName()`
+
+`const characterName = game.details.characterName characterName()
+  characterName()
+`
+
+`game.details.arrowCharacterName()`
+
+
+How can we call `game.details.characterName` and see "Mario" returned without changing any values?
